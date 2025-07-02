@@ -13,6 +13,7 @@ class ParseInput(BaseModel):
 @router.post("/parse")
 async def parse_endpoint(data: ParseInput):
     try:
+        print(data.ocr_output)
         result = process_invoice(data.ocr_output, llm)
         return result
     except Exception as e:
