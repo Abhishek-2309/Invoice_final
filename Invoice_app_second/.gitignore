@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# FastAPI / Uvicorn logs
+*.log
+
+# Temporary files
+uploads/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# Model weights and large data
+*.ckpt
+*.pt
+*.bin
+*.h5
+*.onnx
+*.safetensors
+
+# Hugging Face transformers cache
+.cache/
+huggingface/
+transformers_cache/
+datasets/
+
+# Environment files
+.env
+.env.*
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# VS Code / IDE settings
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage / testing
+htmlcov/
+coverage.xml
+*.cover
+.pytest_cache/
+
+# Jupyter and Colab
+.ipynb_checkpoints/
+*.ipynb
