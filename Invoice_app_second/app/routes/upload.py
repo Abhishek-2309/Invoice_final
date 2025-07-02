@@ -33,7 +33,7 @@ async def upload_invoice(file: UploadFile = File(...)):
         async with AsyncClient(base_url="http://localhost:8000") as client:
             parse_response = await client.post("/api/parse", json={"ocr_output": ocr_result})
             parse_response.raise_for_status()
-            result = parse_response.json()
+            result = parse_response
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Parse step failed: {e}")
 
