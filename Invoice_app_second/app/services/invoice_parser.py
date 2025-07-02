@@ -27,8 +27,11 @@ def process_invoice(markdown_html: str, llm) -> dict:
 
     try:
         raw_table = identify_chain.invoke({"tables": table_str})
+        print("RAW TABLE", raw_table)
         parsed_table = extract_json_from_output(raw_table)
+        print("SUCCESSFULLY PARSED TABLE", parsed_table)
         table_result = TableResult(**parsed_table)
+        print("TABLE_RESULT", table_result)
     except Exception as e:
         raise ValueError(f"Failed to parse main table JSON output: {e}") from e
     finally:
