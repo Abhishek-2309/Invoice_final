@@ -45,8 +45,11 @@ def process_invoice(markdown_html: str, llm) -> dict:
     kv_chain = kv_prompt | llm
     try:
         raw_kv = kv_chain.invoke({"doc_body": remaining_html})
+        print(raw_kv, "RAW KV")
         parsed_kv = extract_json_from_output(raw_kv)
+        print(parsed_kv, "PARSED KV")
         kv_result = KVResult(**parsed_kv)
+        print(kv_result, "KV RESULT")
     except Exception as e:
         raise ValueError(f"Failed to parse KV JSON output: {e}") from e
     finally:
@@ -60,4 +63,5 @@ def process_invoice(markdown_html: str, llm) -> dict:
         Summary=kv_result.Summary,
         Other_Important_Sections=kv_result.Other_Important_Sections,
     )
+    print("INVOICE DATA", invoice_data)
     return invoice_data.model_dump()
