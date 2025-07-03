@@ -29,7 +29,7 @@ async def upload_invoice(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"OCR step failed: {e}")
         
-        markdown_path = os.path.join(UPLOAD_DIR, "ocr_output.md")
+    markdown_path = os.path.join(UPLOAD_DIR, "ocr_output.md")
     try:
         with open(markdown_path, "w", encoding="utf-8") as md_file:
             md_file.write(ocr_result)
