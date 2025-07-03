@@ -28,13 +28,23 @@ async def upload_invoice(file: UploadFile = File(...)):
             ocr_result = ocr_response.json()["ocr_output"]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"OCR step failed: {e}")
-
+        
+    markdown_path = "ocr_output.md"
     try:
+        with open(markdown_path, "w", encoding="utf-8") as md_file:
+            md_file.write(ocr_result)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to write OCR result to markdown: {e}")
+        
+    try:
+        with open(markdown_path, "r", encoding="utf-8") as md_file:
+            markdown_content = md_file.read()
+    
         async with AsyncClient(base_url="http://localhost:8000") as client:
-            parse_response = await client.post("/api/parse", json={"ocr_output": ocr_result})
+            parse_response = await client.post("/api/parse", json={"ocr_output": markdown_content})
             parse_response.raise_for_status()
             result = parse_response
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Parse step failed: {e}")
-
-    return JSONResponse(content=result)
+        
+    return result
