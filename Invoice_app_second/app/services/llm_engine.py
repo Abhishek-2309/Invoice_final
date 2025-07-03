@@ -2,7 +2,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from langchain_huggingface.llms import HuggingFacePipeline
 import torch
 
-model_id = "Qwen/Qwen3-4B"
+model_id = "Qwen/Qwen2.5-7B"
 
 llm_model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16, device_map="auto")
 llm_tokenizer = AutoTokenizer.from_pretrained(model_id)
